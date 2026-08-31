@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HURMUZ COMMODITIES – Engineering Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: auto; }
+    html, body {
+      height: 100%;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #071a1b;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(320px, 46%) 1fr;
+    }
+    .left-panel {
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(160deg, #0a2426 0%, #071c1e 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 3.2rem 2.8rem 2.8rem 3.5rem;
+      clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+    }
+    .left-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 20% 30%, rgba(45, 212, 191, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .logo-area { position: relative; z-index: 1; }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 0.55rem;
+    }
+    .logo-mark {
+      width: 54px;
+      height: 54px;
+      background: linear-gradient(145deg, #14b8a6, #0f766e);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.85rem;
+      color: #fff;
+      letter-spacing: -1px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+      position: relative;
+    }
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      bottom: 7px;
+      left: 10px;
+      right: 10px;
+      height: 3px;
+      background: #5eead4;
+      border-radius: 2px;
+    }
+    .logo-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 1.2px;
+      line-height: 1.15;
+      color: #fff;
+    }
+    .logo-name small {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 3.2px;
+      color: #5eead4;
+      margin-top: 1px;
+    }
+    .tagline {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      letter-spacing: 0.3px;
+      padding-left: 2px;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 400px;
+      padding: 1.5rem 0;
+    }
+    .headline {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 3.2vw, 2.75rem);
+      line-height: 1.12;
+      margin-bottom: 1.35rem;
+      color: #fff;
+    }
+    .headline span {
+      display: block;
+      color: #2dd4bf;
+    }
+    .desc {
+      font-size: 1.02rem;
+      line-height: 1.7;
+      color: #cbd5e1;
+      max-width: 360px;
+    }
+    .location {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .map-svg {
+      width: 42px;
+      height: 52px;
+      flex-shrink: 0;
+    }
+    .loc-text .country {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.02rem;
+      color: #fff;
+    }
+    .loc-text .cities {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+    .right-panel {
+      position: relative;
+      overflow: hidden;
+    }
+    .right-panel .bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('bg2.jpg');
+      background-size: cover;
+      background-position: center right;
+      background-repeat: no-repeat;
+      transform: scale(1.08);
+    }
+    .right-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(7, 28, 30, 0.85) 0%, rgba(7, 28, 30, 0.4) 18%, transparent 45%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .hero-menu {
+      position: absolute;
+      top: 2.2rem;
+      right: 2.5rem;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .hero-menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      position: relative;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+      transition: color 0.25s ease;
+    }
+    .hero-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #2dd4bf;
+      transition: width 0.3s ease;
+    }
+    .hero-menu a:hover,
+    .hero-menu a.active {
+      color: #5eead4;
+    }
+    .hero-menu a:hover::after,
+    .hero-menu a.active::after {
+      width: 100%;
+    }
+    .hamburger {
+      display: none;
+      position: absolute;
+      top: 1.4rem;
+      right: 1.4rem;
+      z-index: 1001;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      width: 34px;
+      height: 34px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2.5px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.35s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      transform-origin: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.active span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(300px, 82vw);
+      height: 100vh;
+      background: linear-gradient(165deg, #0a2426 0%, #071c1e 100%);
+      z-index: 999;
+      padding: 5.5rem 1.8rem 2rem;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+      box-shadow: -12px 0 40px rgba(0,0,0,0.45);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
+    .mobile-menu a {
+      display: block;
+      color: #e2e8f0;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 0.25s ease, padding-left 0.25s ease;
+    }
+    .mobile-menu a:hover,
+    .mobile-menu a.active { color: #2dd4bf; padding-left: 10px; }
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+    .mobile-overlay.open { opacity: 1; visibility: visible; }
+
+    /* ========== SECTIONS ========== */
+    .section {
+      min-height: 70vh;
+      padding: 6.5rem 3rem 4.5rem;
+      position: relative;
+    }
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #2dd4bf;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+    .section-text {
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: #94a3b8;
+      max-width: 620px;
+    }
+    .section.alt { background: #0a2224; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 1.8rem;
+      transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(45, 212, 191, 0.35);
+      background: rgba(45, 212, 191, 0.05);
+    }
+    .card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.7rem;
+      color: #fff;
+    }
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #94a3b8;
+    }
+
+    /* ========== OUR APPROACH SECTION ========== */
+    .approach-section {
+      background: #f8fafc;
+      color: #0f172a;
+      padding: 5rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .approach-header {
+      max-width: 1100px;
+      margin: 0 auto 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .approach-header .left h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+    .approach-header .left p {
+      font-size: 1.15rem;
+      color: #475569;
+      font-weight: 500;
+    }
+    .approach-header .page-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #94a3b8;
+    }
+
+    .orbit-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 620px;
+      aspect-ratio: 1;
+      margin: 0 auto;
+    }
+
+    /* Dashed orbit ring */
+    .orbit-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 78%;
+      height: 78%;
+      transform: translate(-50%, -50%);
+      border: 2px dashed #cbd5e1;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    /* Center circle */
+    .center-circle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 160px;
+      height: 160px;
+      background: #0f3d42;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 5;
+      box-shadow: 0 10px 40px rgba(15, 61, 66, 0.35);
+    }
+    .center-circle span {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      line-height: 1.3;
+      color: #fff;
+      padding: 0 12px;
+      letter-spacing: 0.3px;
+    }
+
+    /* Orbit container that rotates */
+    .orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 78%;
+      height: 78%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+    }
+
+    .orbit-item {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 110px;
+      height: 110px;
+      margin: -55px 0 0 -55px;
+      background: #0f3d42;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 8px 25px rgba(15, 61, 66, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .orbit-item:hover {
+      transform: scale(1.08) !important;
+      box-shadow: 0 12px 35px rgba(15, 61, 66, 0.45);
+    }
+    .orbit-item i {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+      color: #5eead4;
+    }
+    .orbit-item span {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.68rem;
+      line-height: 1.25;
+      padding: 0 8px;
+    }
+
+    .approach-footer {
+      max-width: 700px;
+      margin: 3.5rem auto 0;
+      text-align: center;
+      font-size: 1.05rem;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    footer {
+      background: #051415;
+      padding: 3rem;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    footer p {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 960px) {
+      .hero-menu { display: none; }
+      .hamburger { display: flex; }
+      .hero { grid-template-columns: 1fr; }
+      .left-panel {
+        clip-path: none;
+        padding: 2.4rem 1.6rem 2.2rem;
+        min-height: auto;
+        order: 2;
+      }
+      .right-panel {
+        min-height: 42vh;
+        order: 1;
+      }
+      .right-panel .bg { background-position: center 25%; }
+      .right-panel::before {
+        background: linear-gradient(to bottom, transparent 50%, rgba(7, 28, 30, 0.85) 100%);
+      }
+      .content { max-width: 100%; padding: 1.2rem 0; }
+      .headline { font-size: 1.85rem; }
+      .section { padding: 5rem 1.5rem 3.5rem; }
+
+      /* Approach mobile */
+      .approach-section { padding: 4rem 1.25rem 5rem; }
+      .center-circle {
+        width: 130px;
+        height: 130px;
+      }
+      .center-circle span { font-size: 0.82rem; }
+      .orbit-item {
+        width: 90px;
+        height: 90px;
+        margin: -45px 0 0 -45px;
+      }
+      .orbit-item i { font-size: 1.15rem; margin-bottom: 4px; }
+      .orbit-item span { font-size: 0.6rem; }
+    }
+
+    @media (max-width: 480px) {
+      .left-panel { padding: 1.8rem 1.25rem 2rem; }
+      .logo-mark { width: 46px; height: 46px; font-size: 1.55rem; }
+      .logo-name { font-size: 1.25rem; }
+      .logo-name small { font-size: 0.72rem; letter-spacing: 2.5px; }
+      .headline { font-size: 1.65rem; }
+      .hamburger { top: 1.1rem; right: 1.1rem; }
+
+      .center-circle {
+        width: 110px;
+        height: 110px;
+      }
+      .center-circle span { font-size: 0.72rem; padding: 0 8px; }
+      .orbit-item {
+        width: 78px;
+        height: 78px;
+        margin: -39px 0 0 -39px;
+      }
+      .orbit-item i { font-size: 1rem; }
+      .orbit-item span { font-size: 0.55rem; padding: 0 5px; }
+      .approach-header .left h2 { font-size: 1.5rem; }
+      .approach-header .left p { font-size: 0.95rem; }
+      .approach-footer { font-size: 0.92rem; }
+    }
+
+    @media (min-width: 1400px) {
+      .left-panel { padding: 4rem 3.5rem 3.5rem 5rem; }
+      .headline { font-size: 3rem; }
+      .hero-menu { top: 2.8rem; right: 3.5rem; gap: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#home" class="mobile-link">Home</a></li>
+      <li><a href="#about" class="mobile-link">About</a></li>
+      <li><a href="#approach" class="mobile-link">Our Approach</a></li>
+      <li><a href="#capabilities" class="mobile-link">Capabilities</a></li>
+      <li><a href="#equipment" class="mobile-link">Equipment</a></li>
+      <li><a href="#industries" class="mobile-link">Industries</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="left-panel">
+      <div class="logo-area">
+        <div class="logo">
+          <div class="logo-mark">H</div>
+          <div class="logo-name">
+            HURMUZ
+            <small>COMMODITIES</small>
+          </div>
+        </div>
+        <p class="tagline">Industrial Solutions | System Integration | Project Support</p>
+      </div>
+      <div class="content">
+        <h1 class="headline">
+          Engineering<br>Solutions.
+          <span>Industrial Strength.</span>
+        </h1>
+        <p class="desc">
+          Supporting industrial requirements through system integration, equipment procurement, technical coordination and project support.
+        </p>
+      </div>
+      <div class="location">
+        <svg class="map-svg" viewBox="0 0 48 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 4C18 9 14 18 13 27C12 36 13 45 16 52C19 56 22 58 24 58C26 58 29 56 32 52C35 45 36 36 35 27C34 18 30 9 24 4Z" fill="#2dd4bf" fill-opacity="0.18"/>
+          <path d="M24 8C20 12 17 19 16.5 27C16 35 17 43 19.5 50C21 54 23 56 24 56C25 56 27 54 28.5 50C31 43 32 35 31.5 27C31 19 28 12 24 8Z" fill="#2dd4bf" fill-opacity="0.35"/>
+          <path d="M24 14C22 17 20.5 22 20 28C19.5 34 20 40 21.5 46C22.5 50 23.5 52 24 52C24.5 52 25.5 50 26.5 46C28 40 28.5 34 28 28C27.5 22 26 17 24 14Z" fill="#5eead4" fill-opacity="0.7"/>
+          <path d="M18 20 C16 28 16 38 19 48 C21 53 24 56 24 56 C24 56 27 53 29 48 C32 38 32 28 30 20 C28 15 22 15 18 20Z" stroke="#5eead4" stroke-width="1.4" fill="none" opacity="0.9"/>
+        </svg>
+        <div class="loc-text">
+          <div class="country">Sultanate of Oman</div>
+          <div class="cities">Muscat | Sohar</div>
+        </div>
+      </div>
+    </div>
+    <div class="right-panel">
+      <div class="bg" role="img" aria-label="Industrial facility"></div>
+      <nav class="hero-menu">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#approach" class="nav-link">Our Approach</a>
+        <a href="#capabilities" class="nav-link">Capabilities</a>
+        <a href="#equipment" class="nav-link">Equipment</a>
+        <a href="#industries" class="nav-link">Industries</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-inner">
+      <p class="section-label">About Us</p>
+      <h2 class="section-title">Built for Industrial Excellence</h2>
+      <p class="section-text">
+        Hurmuz Commodities is a trusted partner for industrial projects across the Sultanate of Oman. 
+        We specialize in bridging the gap between complex technical requirements and reliable execution — 
+        from system integration to end-to-end project support.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== OUR APPROACH ========== -->
+  <section class="approach-section" id="approach">
+    <div class="approach-header">
+      <div class="left">
+        <h2>Our Approach</h2>
+        <p>Technical Understanding. Collaborative Delivery.</p>
+      </div>
+      <div class="page-num">08</div>
+    </div>
+
+    <div class="orbit-wrapper">
+      <div class="orbit-ring"></div>
+
+      <!-- Center -->
+      <div class="center-circle">
+        <span>CUSTOMER<br>REQUIREMENT</span>
+      </div>
+
+      <!-- Rotating orbit items -->
+      <div class="orbit" id="orbit">
+        <div class="orbit-item" data-angle="0">
+          <i class="fa-solid fa-file-lines"></i>
+          <span>Technical<br>Evaluation</span>
+        </div>
+        <div class="orbit-item" data-angle="72">
+          <i class="fa-solid fa-gears"></i>
+          <span>Equipment<br>Selection</span>
+        </div>
+        <div class="orbit-item" data-angle="144">
+          <i class="fa-solid fa-truck"></i>
+          <span>Procurement<br>&amp; Coordination</span>
+        </div>
+        <div class="orbit-item" data-angle="216">
+          <i class="fa-solid fa-puzzle-piece"></i>
+          <span>Integration<br>&amp; Packages</span>
+        </div>
+        <div class="orbit-item" data-angle="288">
+          <i class="fa-solid fa-headset"></i>
+          <span>Delivery<br>&amp; Support</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="approach-footer">
+      A single point of coordination across technical, commercial and project interfaces.
+    </p>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section class="section alt" id="capabilities">
+    <div class="section-inner">
+      <p class="section-label">What We Do</p>
+      <h2 class="section-title">Our Capabilities</h2>
+      <p class="section-text">
+        Comprehensive engineering and procurement services designed to keep your operations running efficiently.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <h3>System Integration</h3>
+          <p>Seamless integration of industrial systems, control panels, and process equipment for optimized performance.</p>
+        </div>
+        <div class="card">
+          <h3>Equipment Procurement</h3>
+          <p>Sourcing and supply of high-quality industrial equipment with full technical coordination and logistics support.</p>
+        </div>
+        <div class="card">
+          <h3>Technical Coordination</h3>
+          <p>Expert oversight of technical specifications, vendor management, and on-site coordination.</p>
+        </div>
+        <div class="card">
+          <h3>Project Support</h3>
+          <p>End-to-end project assistance from planning and execution through to commissioning and handover.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPMENT -->
+  <section class="section" id="equipment">
+    <div class="section-inner">
+      <p class="section-label">Products</p>
+      <h2 class="section-title">Equipment & Solutions</h2>
+      <p class="section-text">
+        We supply and support a wide range of industrial equipment tailored to the demanding environments of oil & gas, 
+        petrochemical, and process industries.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <h3>Process Equipment</h3>
+          <p>Pumps, valves, heat exchangers, and pressure vessels from trusted global manufacturers.</p>
+        </div>
+        <div class="card">
+          <h3>Control Systems</h3>
+          <p>PLC, SCADA, and instrumentation packages for precise process control and monitoring.</p>
+        </div>
+        <div class="card">
+          <h3>Piping & Fittings</h3>
+          <p>High-spec piping systems, flanges, and specialty fittings for critical applications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="section alt" id="industries">
+    <div class="section-inner">
+      <p class="section-label">Sectors</p>
+      <h2 class="section-title">Industries We Serve</h2>
+      <p class="section-text">
+        Delivering specialized solutions across key industrial sectors in Oman and the region.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <h3>Oil & Gas</h3>
+          <p>Upstream, midstream, and downstream support for production, refining, and export facilities.</p>
+        </div>
+        <div class="card">
+          <h3>Petrochemical</h3>
+          <p>Equipment and integration services for chemical processing and specialty product plants.</p>
+        </div>
+        <div class="card">
+          <h3>Power & Utilities</h3>
+          <p>Solutions for power generation, water treatment, and industrial utility systems.</p>
+        </div>
+        <div class="card">
+          <h3>Mining & Metals</h3>
+          <p>Heavy-duty equipment and systems for extraction, processing, and material handling.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Hurmuz Commodities. Sultanate of Oman — Muscat | Sohar</p>
+  </footer>
+
+  <script>
+    // ========== LENIS ==========
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+    });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+
+    // ========== MOBILE MENU ==========
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+
+    function openMenu() {
+      hamburger.classList.add('active');
+      mobileMenu.classList.add('open');
+      mobileOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('open');
+      mobileOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    mobileOverlay.addEventListener('click', closeMenu);
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        closeMenu();
+        if (target) setTimeout(() => lenis.scrollTo(target, { offset: -20 }), 300);
+      });
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) lenis.scrollTo(target, { offset: -20 });
+      });
+    });
+
+    // Active link
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    function updateActiveLink() {
+      let current = '';
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 150) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+      });
+    }
+    window.addEventListener('scroll', updateActiveLink);
+
+    // ========== GSAP + Orbit Rotation ==========
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Position orbit items in a circle
+    function positionOrbitItems() {
+      const items = document.querySelectorAll('.orbit-item');
+      const radius = 50; // percentage of orbit container
+      items.forEach((item, i) => {
+        const angle = (i * 72) * (Math.PI / 180); // 5 items = 72 deg each
+        const x = 50 + radius * Math.cos(angle - Math.PI / 2);
+        const y = 50 + radius * Math.sin(angle - Math.PI / 2);
+        item.style.left = x + '%';
+        item.style.top = y + '%';
+      });
+    }
+    positionOrbitItems();
+
+    // Continuous soft rotation of the whole orbit
+    gsap.to('#orbit', {
+      rotation: 360,
+      duration: 40,
+      repeat: -1,
+      ease: 'none',
+      transformOrigin: '50% 50%'
+    });
+
+    // Counter-rotate each item so text stays upright
+    gsap.to('.orbit-item', {
+      rotation: -360,
+      duration: 40,
+      repeat: -1,
+      ease: 'none'
+    });
+
+    // Hero animations
+    gsap.from('.headline', { y: 40, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
+    gsap.from('.desc', { y: 30, opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.4 });
+    gsap.from('.hero-menu a', { y: -20, opacity: 0, duration: 0.7, stagger: 0.08, ease: 'power3.out', delay: 0.5 });
+
+    // Section reveals
+    gsap.utils.toArray('.section').forEach(section => {
+      gsap.from(section.querySelector('.section-title'), {
+        scrollTrigger: { trigger: section, start: 'top 75%' },
+        y: 40, opacity: 0, duration: 0.8, ease: 'power3.out'
+      });
+      gsap.from(section.querySelectorAll('.card'), {
+        scrollTrigger: { trigger: section, start: 'top 70%' },
+        y: 50, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out'
+      });
+    });
+
+    // Approach section entrance
+    gsap.from('.center-circle', {
+      scrollTrigger: { trigger: '.approach-section', start: 'top 70%' },
+      scale: 0.6, opacity: 0, duration: 0.9, ease: 'back.out(1.6)'
+    });
+    gsap.from('.orbit-item', {
+      scrollTrigger: { trigger: '.approach-section', start: 'top 70%' },
+      scale: 0, opacity: 0, duration: 0.7, stagger: 0.1, ease: 'back.out(1.4)', delay: 0.2
+    });
+  </script>
+</body>
+</html>
